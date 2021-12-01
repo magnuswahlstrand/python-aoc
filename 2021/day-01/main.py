@@ -1,28 +1,22 @@
-import input
+from util import read_input
 
 
-def find_product_day1(entries, wanted_sum):
-    for i, e in enumerate(entries):
-        for f in entries[i + 1:]:
-            if e + f == wanted_sum:
-                return e * f
-    raise ValueError(f"no sum pairs found matching {wanted_sum}")
+def count_increasing(input_file: str):
+    lines = read_input(input_file)
+    return sum([1 for (a, b) in zip(lines, lines[1:]) if int(b) > int(a)])
+
+def count_increasing_average(input_file: str):
+    lines = read_input(input_file)
+    return sum([1 for (a, b) in zip(lines, lines[3:]) if int(b) > int(a)])
 
 
-def find_product_day2(entries, wanted_sum):
-    for i, e in enumerate(entries):
-        for f in entries[i + 1:]:
-            for g in entries[i + 1:]:
-                if f == g:
-                    continue
+test_count = count_increasing("input_test.txt")
+assert test_count == 7
+print("result for day-1 test is:", test_count, "as expected")
+test_count = count_increasing_average("input_test.txt")
+assert test_count == 5
+print("result for day-2 test is:", test_count, "as expected")
 
-                if e + f + g == wanted_sum:
-                    return e * f * g
-    raise ValueError(f"no sum of values found matching {wanted_sum}")
+print("result for day-1:", count_increasing("input.txt"))
+print("result for day-2:", count_increasing_average("input.txt"))
 
-
-if __name__ == "__main__":
-    day_1 = find_product_day1(input.input, 2020)
-    day_2 = find_product_day2(input.input, 2020)
-    print(f"result for day 1 is: {day_1}")
-    print(f"result for day 2 is: {day_2}")
