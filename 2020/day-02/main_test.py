@@ -13,3 +13,6 @@ def test_parse_passports():
 
 def test_day_01_input():
     assert main.count_valid_passports('input_text.txt') == 2
+
+def test_day_02_input():
+    assert main.count_valid_passports('input_test.txt', main.is_valid_v2) == 1
