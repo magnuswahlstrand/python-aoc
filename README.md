@@ -9,3 +9,4 @@
 * `defaultdict`
 * `namedtuple`
 * caching is hard (**2020, day-10**)
+* `from itertools import product`
