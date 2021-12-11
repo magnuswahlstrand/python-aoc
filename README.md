@@ -10,3 +10,6 @@
 * `namedtuple`
 * caching is hard (**2020, day-10**)
 * `from itertools import product`
+
+#### TODO
+* Find some better numpy solutions for 2020, day-17.
