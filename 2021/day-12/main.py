@@ -117,28 +117,60 @@ def count_paths(lines: List[str]):
     return len(ps)
 
 
+# Inspired by https://www.reddit.com/r/adventofcode/comments/rehj2r/comment/ho8w7hx/?utm_source=share&utm_medium=web2x&context=3
+def alt_part_1(lines: List[str], can_repeat=False):
+    d = defaultdict(set)
+    for a, b in [p.split('-', maxsplit=2) for p in lines]:
+        d[a].add(b)
+        d[b].add(a)
+
+    return alt_count_paths(d, ('start',), can_repeat)
+
+
+def alt_count_paths(graph, path, can_repeat):
+    if path[-1] == "end":
+        return 1
+
+    paths = 0
+    for nxt in graph[path[-1]]:
+        if not (nxt.islower() and nxt in path):
+            paths += alt_count_paths(graph, path + (nxt,), can_repeat)
+        elif can_repeat and nxt != 'start':
+            paths += alt_count_paths(graph, path + (nxt,), False)
+
+    return paths
+
+
 def count_paths_v2(lines: List[str]):
     d = setup(lines)
     visited = defaultdict(int)
     ps = find_paths_v2(d, 'start', visited)
-    for p in ps:
-        print(",".join(p))
     return len(ps)
 
 
 def part_1():
-    return count_paths(input)
+    return alt_part_1(input)
 
 
 def part_2():
-    return count_paths_v2(input)
+    return alt_part_1(input, True)
 
 
-assert_test(count_paths(test_input), 10, 1)
-assert_test(count_paths(test_input_2), 19, 1)
-assert_test(count_paths(test_input_3), 226, 1)
-assert_test(count_paths_v2(test_input), 36, 2)
-assert_test(count_paths_v2(test_input_2), 103, 2)
-assert_test(count_paths_v2(test_input_3), 3509, 2)
-print("result for day-1:", part_1())
+# assert_test(count_paths(test_input), 10, 1)
+# assert_test(count_paths(test_input_2), 19, 1)
+# assert_test(count_paths(test_input_3), 226, 1)
+# assert_test(count_paths_v2(test_input), 36, 2)
+# assert_test(count_paths_v2(test_input_2), 103, 2)
+# assert_test(count_paths_v2(test_input_3), 3509, 2)
+# print("result for day-1:", part_1())
+# print("result for day-2:", part_2())
+
+assert_test(alt_part_1(test_input), 10, 1)
+assert_test(alt_part_1(test_input_2), 19, 1)
+assert_test(alt_part_1(test_input_3), 226, 1)
+# print("result for day-1:", part_1())
+
+assert_test(alt_part_1(test_input, can_repeat=True), 36, 2)
+assert_test(alt_part_1(test_input_2, can_repeat=True), 103, 2)
+assert_test(alt_part_1(test_input_3, can_repeat=True), 3509, 2)
 print("result for day-2:", part_2())
