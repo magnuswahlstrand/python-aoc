@@ -1,7 +1,7 @@
 # python-aoc
 
-![](https://img.shields.io/badge/stars%20⭐-22-yellow)
-![](https://img.shields.io/badge/days%20completed-11-blue)
+![](https://img.shields.io/badge/stars%20⭐-24-yellow)
+![](https://img.shields.io/badge/days%20completed-12-blue)
 
 ### Lessons learnt
 
