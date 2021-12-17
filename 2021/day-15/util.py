@@ -39,7 +39,6 @@ def neighbors(o, size):
                 yield x, y
 
 
-
 def neighbors_manhattan(o, size):
     for c in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
         x, y = o[0] + c[0], o[1] + c[1]
