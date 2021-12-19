@@ -1,6 +1,6 @@
 from typing import List
 
-from util import read_lines, assert_test
+from util import *
 
 test_input = read_lines("input_test.txt")
 
